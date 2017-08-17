@@ -1,12 +1,20 @@
 from django.http import HttpResponse
 
+#Initial Database
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+db = client.hospital_info
+import pprint
+
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the api index.")
+    return HttpResponse("API index.")
 
-
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+def user(request, user_id):
+    members = db.member_info
+    for member in members.find():
+        pprint.pprint(member)
+    return HttpResponse(collection)
 
 
 def results(request, question_id):
