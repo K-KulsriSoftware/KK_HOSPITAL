@@ -13,7 +13,9 @@ def index(request):
 def user(request, user_id):
     members = db.member_info
     query = [
-        {"$match": {"user_id": user_id}}
+        {
+            "$match": {"user_id": user_id}
+        }
     ]
     member = members.aggregate(query)
     return HttpResponse(dumps(member))
